@@ -12,7 +12,6 @@
             </div>
         </div>
     </div>
-
     <div class="col-6 col-md-3">
         <div class="info-box bg-success">
             <span class="info-box-icon"><i class="fas fa-users"></i></span>
@@ -22,9 +21,16 @@
             </div>
         </div>
     </div>
+    <div class="col-6 col-md-3">
+        <div class="info-box bg-warning">
+            <span class="info-box-icon"><i class="fas fa-users"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Panitia</span>
+                <span class="info-box-number"><?= $TotalPanita ?></span>
+            </div>
+        </div>
+    </div>
 </div>
-
-
 </div>
 
 <?= $this->endSection() ?>

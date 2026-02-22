@@ -45,7 +45,7 @@ class LoginController extends BaseController
         $roleId = session()->get('user')['role_id'];
 
         return match ((int) $roleId) {
-            1 => redirect()->to('/dashboard'),          // superadmin
+            1 => redirect()->to('/admin/dashboard'),          // superadmin
             6 => redirect()->to('/cabang/dashboard'),   // admin cabang
             default => $this->logout(),                 // ⛔ role tidak dikenal
         };

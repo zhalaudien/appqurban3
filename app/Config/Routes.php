@@ -21,12 +21,13 @@ $routes->group('admin', ['filter' => 'role:1'], function ($routes) {
     $routes->post('cabang/update/(:num)', 'Admin\CabangController::update/$1');
     $routes->get('cabang/delete/(:num)', 'Admin\CabangController::delete/$1');
 
-    $routes->get('panitia', 'Admin\PanitiaController::index');
-    $routes->get('panitia/create', 'Admin\PanitiaController::create');
-    $routes->post('panitia/store', 'Admin\PanitiaController::store');
-    $routes->get('panitia/edit/(:num)', 'Admin\PanitiaController::edit/$1');
-    $routes->post('panitia/update/(:num)', 'Admin\PanitiaController::update/$1');
-    $routes->get('panitia/delete/(:num)', 'Admin\PanitiaController::delete/$1');
+    $routes->get('panitia', 'Admin\Data\PanitiaController::index');
+    $routes->get('panitia/create', 'Admin\Data\PanitiaController::create');
+    $routes->post('panitia/store', 'Admin\Data\PanitiaController::store');
+    $routes->get('panitia/edit/(:num)', 'Admin\Data\PanitiaController::edit/$1');
+    $routes->post('panitia/update/(:num)', 'Admin\Data\PanitiaController::update/$1');
+    $routes->get('panitia/delete/(:num)', 'Admin\Data\PanitiaController::delete/$1');
+    $routes->post('panitia/import', 'Admin\Data\PanitiaController::import');
 
     $routes->get('muspika', 'Admin\MuspikaController::index');
     $routes->get('muspika/create', 'Admin\MuspikaController::create');

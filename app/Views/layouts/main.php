@@ -1,29 +1,25 @@
-<!DOCTYPE html>
-<html lang="id">
+<!doctype html>
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title><?= esc($title ?? 'Dashboard') ?></title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <?= $this->include('partials/header') ?>
+    <?= $this->include('layouts/header') ?>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        <?= $this->include('partials/sidebar') ?>
+        <?= $this->include('layouts/navbar') ?>
+        <?= $this->include('layouts/sidebar') ?>
 
         <!-- Content Wrapper -->
         <div class="content-wrapper">
 
-            <!-- Content Header -->
-            <section class="content-header">
+            <!-- Page Header -->
+            <div class="content-header">
                 <div class="container-fluid">
-                    <h1><?= esc($title ?? '') ?></h1>
+                    <?= $this->renderSection('page_header') ?>
                 </div>
-            </section>
+            </div>
 
             <!-- Main Content -->
             <section class="content">
@@ -34,7 +30,7 @@
 
         </div>
 
-        <?= $this->include('partials/footer') ?>
+        <?= $this->include('layouts/footer') ?>
 
     </div>
 </body>

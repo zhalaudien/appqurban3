@@ -6,41 +6,42 @@ use CodeIgniter\Model;
 
 class PanitiaModel extends Model
 {
-    protected $table            = 'panitias';
-    protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $table = 'panitia';
+    protected $primaryKey = 'id';
 
-    protected bool $allowEmptyInserts = false;
-    protected bool $updateOnlyChanged = true;
+    protected $allowedFields = [
+        'nama',
+        'no_hp',
+        'cabang_id',
+        'seksi_id',
+        'jabatan'
+    ];
 
-    protected array $casts = [];
-    protected array $castHandlers = [];
+    protected $useTimestamps = true;
 
-    // Dates
-    protected $useTimestamps = false;
-    protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    public function getWithRelation($search = null, $cabangFilter = null)
+    {
+        $builder = $this->select('
+                panitia.*,
+                cabang.nama_cabang,
+                seksi.nama_seksi
+            ')
+            ->join('cabang', 'cabang.id = panitia.cabang_id')
+            ->join('seksi', 'seksi.id = panitia.seksi_id');
 
-    // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
+        if ($search) {
+            $builder->groupStart()
+                ->like('panitia.nama', $search)
+                ->orLike('panitia.no_hp', $search)
+                ->orLike('cabang.nama_cabang', $search)
+                ->orLike('seksi.nama_seksi', $search)
+                ->groupEnd();
+        }
 
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
+        if ($cabangFilter) {
+            $builder->where('panitia.cabang_id', $cabangFilter);
+        }
+
+        return $builder->orderBy('panitia.nama', 'ASC')->findAll();
+    }
 }
